@@ -16,7 +16,7 @@ def index():
             flash('Enter a non-negative integer')
             return redirect('/')
         flash(
-            f'Fibonacci: {form.number.data} = {data["fibonacci"]}')
+            f'Fibonacci: {form.number.data} = {data}')
         return redirect('/')
     return render_template('base.html', title='Fibonacci Generator', form=form)
 
@@ -30,7 +30,7 @@ def get_fibonacci(number):
     if not data:
         return jsonify(['Enter a non-negative integer'])
 
-    return jsonify(data)
+    return jsonify({'fibonacci': data})
 
 
 # Fibonacci function
@@ -41,23 +41,24 @@ def get_fibonacci_sequence(terms):
 
     or 
 
-    data = {"fibonacci": 12}
+    fibonacci_sum = 123
     """
     if cache.exists(str(terms)):
         print('redis get obj')
-        return json.loads(cache.get(str(terms)).decode('utf-8').replace("\'", "\""))
+        fibonacci_sum = cache.get(terms).decode('utf-8')
+        return fibonacci_sum
         
     n1, n2 = 0, 1
     count = 0
 
-    data = {}
+    fibonacci_sum = 0
     sequence = [0, 1]
 
     if terms <= 0:
         return False
     elif terms == 1:
-        data["fibonacci"] = n2
-        cache.mset({str(terms): json.dumps(data)})
+        fibonacci_sum = n2
+        cache.mset({terms: fibonacci_sum})
     else:
         while count <= terms:
             sequence.append(n1)
@@ -66,9 +67,9 @@ def get_fibonacci_sequence(terms):
             n2 = nth
             count += 1
 
-        data["fibonacci"] = sum(sequence)
-        cache.mset({str(terms): json.dumps(data)})
-    return data
+        fibonacci_sum = sum(sequence)
+        cache.mset({terms: fibonacci_sum})
+    return fibonacci_sum
 
 
 if __name__ == "__main__":
