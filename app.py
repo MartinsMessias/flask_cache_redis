@@ -54,9 +54,9 @@ def get_fibonacci_sequence(terms):
     count = 1
 
     data = {}
-    sequence = []
+    sequence = [1]
 
-    if terms < 0:
+    if terms <= 0:
         return False
     elif terms == 1:
         data["fibonacci"] = n2
