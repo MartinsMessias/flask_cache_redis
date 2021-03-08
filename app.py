@@ -41,10 +41,7 @@ def get_fibonacci_sequence(terms):
 
     or 
 
-    data = {
-        fibonacci: 12,
-        sequence: [0, 1, 1, 2, 3, 5],
-    }
+    data = {"fibonacci": 12}
     """
     if cache.exists(str(terms)):
         print('redis get obj')
