@@ -16,7 +16,7 @@ def index():
             flash('Enter a non-negative integer')
             return redirect('/')
         flash(
-            f'Fibonacci: {form.number.data} = {[term for term in data["fibonacci"]]}')
+            f'Fibonacci: {form.number.data} = {data["fibonacci"]}')
         return redirect('/')
     return render_template('base.html', title='Fibonacci Generator', form=form)
 
