@@ -50,7 +50,7 @@ def get_fibonacci_sequence(terms):
     """
     if cache.exists(str(terms)):
         print('redis get obj')
-        return json.loads(cache.get(str(terms)).replace("\'", "\""))
+        return json.loads(cache.get(str(terms)).decode('utf-8').replace("\'", "\""))
         
     n1, n2 = 0, 1
     count = 0
