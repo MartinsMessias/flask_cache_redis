@@ -73,7 +73,7 @@ def get_fibonacci_sequence(terms):
             count += 1
 
         data["sequence"] = sequence
-        data["fibonacci"] = sum[sequence]
+        data["fibonacci"] = sum(sequence)
         cache.mset({str(terms): json.dumps(data)})
     return data
 
