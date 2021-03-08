@@ -2,5 +2,4 @@ flask
 flask-wtf
 flask_caching
 redis
-json
 gunicorn
