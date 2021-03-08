@@ -16,9 +16,7 @@ def index():
             flash('Enter a non-negative integer')
             return redirect('/')
         flash(
-            f'Fibonacci sequence for {form.number.data} is {[term for term in data["sequence"]]}')
-        flash(
-            f'= {data["fibonacci"]}')
+            f'Fibonacci: {form.number.data} = {[term for term in data["fibonacci"]]}')
         return redirect('/')
     return render_template('base.html', title='Fibonacci Generator', form=form)
 
@@ -53,7 +51,7 @@ def get_fibonacci_sequence(terms):
         return json.loads(cache.get(str(terms)).decode('utf-8').replace("\'", "\""))
         
     n1, n2 = 0, 1
-    count = 0
+    count = 1
 
     data = {}
     sequence = []
@@ -61,7 +59,6 @@ def get_fibonacci_sequence(terms):
     if terms <= 0:
         return False
     elif terms == 1:
-        data["sequence"] = [n1, n2]
         data["fibonacci"] = n2
         cache.mset({str(terms): json.dumps(data)})
     else:
@@ -72,7 +69,6 @@ def get_fibonacci_sequence(terms):
             n2 = nth
             count += 1
 
-        data["sequence"] = sequence
         data["fibonacci"] = sum(sequence)
         cache.mset({str(terms): json.dumps(data)})
     return data
