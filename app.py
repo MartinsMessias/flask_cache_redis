@@ -16,7 +16,7 @@ def index():
             flash('Enter a non-negative integer')
             return redirect('/')
         flash(
-            f'Fibonacci: {form.number.data} = {data}')
+            f'Fibonacci sum for: {form.number.data} = {data}')
         return redirect('/')
     return render_template('base.html', title='Fibonacci Generator', form=form)
 

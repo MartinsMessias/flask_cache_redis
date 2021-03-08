@@ -29,11 +29,11 @@
     </form>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
-    <ul>
+    <div class="container" style="word-wrap: break-word;">
       {% for message in messages %}
-      <li>{{ message }}</li>
+      <p class="light">{{ message }}</p>
       {% endfor %}
-    </ul>
+    </div>
     {% endif %}
     {% endwith %}
   </section>
