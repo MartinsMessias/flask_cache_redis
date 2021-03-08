@@ -25,8 +25,8 @@ def index():
 
 @app.route('/fibonacci/<number>', methods=['GET'])
 def get_fibonacci(number):
-    if int(number) > 2500:
-        return jsonify(['Number must be between 1 and 2500'])
+    if int(number) > 2000:
+        return jsonify(['Number must be between 1 and 2000'])
     data = get_fibonacci_sequence(int(number))
 
     if not data:
