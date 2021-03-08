@@ -51,10 +51,10 @@ def get_fibonacci_sequence(terms):
         return json.loads(cache.get(str(terms)).decode('utf-8').replace("\'", "\""))
         
     n1, n2 = 0, 1
-    count = 1
+    count = 0
 
     data = {}
-    sequence = [1]
+    sequence = [0, 1]
 
     if terms <= 0:
         return False
