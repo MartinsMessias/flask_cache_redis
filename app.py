@@ -4,7 +4,6 @@ from flask.wrappers import Response
 
 from settings import app, cache
 from forms import FiboForm
-import json
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -23,8 +22,9 @@ def index():
 
 @app.route('/fibonacci/<number>', methods=['GET'])
 def get_fibonacci(number):
-    if int(number) > 10000:
-        return jsonify(['Number must be between 1 and 10000'])
+    if not number.isnumeric() or int(number) > 10000:
+        return jsonify(['Enter a number must be between 1 and 10000'])
+        
     data = get_fibonacci_sequence(int(number))
 
     if not data:
@@ -47,7 +47,7 @@ def get_fibonacci_sequence(terms):
         print('redis get obj')
         fibonacci_sum = cache.get(terms).decode('utf-8')
         return fibonacci_sum
-        
+
     n1, n2 = 0, 1
     count = 0
 
